@@ -8,7 +8,7 @@ print("Hello")
 sense.show_letter("A")
 print("Lancement de l'apprentissage.")
 rhasspy.train_intent_files("/home/pi/sentences.txt")
-print("Apprentissage terminé.")
+print("Apprentissage termine.")
 state = True
 state2 = True
 course_list = []
