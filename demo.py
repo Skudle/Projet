@@ -13,6 +13,41 @@ state = True
 state2 = True
 course_list = []
 
+'''def encode(key, plain_text):
+	"""
+	Chiffre un texte en utilisant une clé de chiffrement.
+	Les deux arguments sont fournis sous la forme d'une chaine de caractères.
+	L'algorithme utilisé est le chiffrement de Vigenère.
+	Attention : cette méthode est "craquée" depuis longtemps, mais elle illustre le fonctionnement d'un algorithme de chiffrement.
+
+	:param (str) key: la clé symétrique
+	:param (str) plain_text: le texte à chiffrer
+	:return (str): le texte chiffré
+	"""
+	enc = []
+	for i, e in enumerate(plain_text):
+		key_c = key[i % len(key)]
+		enc_c = chr((ord(e) + ord(key_c)) % 256)
+		enc.append(enc_c)
+	return "".join(enc)
+
+def decode(key, cipher_text):
+	"""
+	Déchiffre le texte en utilisant la clé de déchiffrement.
+	Les deux arguments sont fournis sous la forme d'une chaine de caractères.
+	L'algorithme utilisé est le (dé)chiffrement de Vigenère.
+	Attention : cette méthode est "craquée" depuis longtemps, mais elle illustre le fonctionnement d'un algorithme de (dé-)chiffrement.
+
+	:param (str) key: la clé symétrique
+	:param (str) cipher_text: le texte crypté
+	:return (str): le texte décrypté
+	"""
+	dec = []
+	for i, e in enumerate(cipher_text):
+		key_c = key[i % len(key)]
+		dec_c = chr((256 + ord(e) - ord(key_c)) % 256)
+		dec.append(dec_c)
+	return str("".join(dec))'''
 
 while state:
     sense.show_letter("T")
@@ -46,7 +81,7 @@ while state:
                 print(article['variables']['article'])
 
                 course_list.append((article['variables']['article'], article['variables']['qty']))
-    elif intent['name'] == 'Code':
+    '''elif intent['name'] == 'Code':
         print("Commande code détecté")
         e_ou_d = rhasspy.speech_to_intent()
         if e_ou_d['name'] == "Encrypter":
@@ -58,7 +93,7 @@ while state:
             print("Quelle est le mot de passe?")
             input_ = rhasspy.speech_to_intent()
             if input_['name'] == 'Decrypter':
-                print(passwd)
+                print(passwd)'''
 
 
 
