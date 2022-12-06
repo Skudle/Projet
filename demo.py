@@ -1,3 +1,4 @@
+# coding=utf-8
 import rhasspy
 from sense_hat import SenseHat
 
