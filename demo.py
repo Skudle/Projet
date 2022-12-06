@@ -13,7 +13,7 @@ print("Apprentissage termine.")
 state = True
 state2 = True
 course_list = []
-
+print('hi')
 while state:
 
     sense.show_letter("T")
