@@ -1,7 +1,8 @@
-import rhasspy
-from sense_hat import SenseHat
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
+import rhasspy
+from sense_hat import SenseHat
+
 
 sense = SenseHat()
 
