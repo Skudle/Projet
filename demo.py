@@ -1,13 +1,13 @@
 # coding=utf-8
 import rhasspy
-from sense_hat import SenseHat
+'''from sense_hat import SenseHat'''
 
 
-sense = SenseHat()
+'''sense = SenseHat()'''
 
 # Lance l'apprentissage du fichier sentences.ini. Commentez cette partie si vous souhaitez ne pas le lancer
 print("Hello")
-sense.show_letter("A")
+'''sense.show_letter("A")'''
 print("Lancement de l'apprentissage.")
 rhasspy.train_intent_files("/home/pi/sentences.txt")
 print("Apprentissage termine.")
@@ -17,9 +17,9 @@ course_list = []
 print('hi')
 while state:
 
-    sense.show_letter("T")
+    '''sense.show_letter("T")'''
     # Introduction enoncee
-    rhasspy.text_to_speech("Enoncez votre phrase, s'il vous plait.")
+    #rhasspy.text_to_speech("Enoncez votre phrase, s'il vous plait.")
     # Reception d'une commande vocale et affichage du resultat.
     intent = rhasspy.speech_to_intent()
 
@@ -31,11 +31,11 @@ while state:
                 print("stop working")
                 state2 = False
                 print(course_list)
-                rhasspy.text_to_speech('Commande course arrete')
+                #rhasspy.text_to_speech('Commande course arrete')
                 print('Commande course arrete')
             elif article["name"] == "list":
                 print(course_list)
-                rhasspy.text_to_speech(str(course_list))
+                #rhasspy.text_to_speech(str(course_list))
 
             elif article['name'] == 'Delete':
                 course_list.clear()
@@ -56,4 +56,4 @@ while state:
     rhasspy.text_to_speech("Vous avez lance la commande {} avec les parametres {}".format(intent["name"], intent["variables"]))
 
     # Affiche la commande vocale recue.
-    sense.show_message("Commande : {}".format(intent["name"]), scroll_speed=0.07)
+    '''sense.show_message("Commande : {}".format(intent["name"]), scroll_speed=0.07)'''
