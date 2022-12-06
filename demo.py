@@ -17,7 +17,7 @@ print("hi")
 while state:
 
     sense.show_letter("T")
-    # Introduction énoncée
+    # Introduction enonce
     rhasspy.text_to_speech("Énoncez votre phrase, s'il vous plait.")
     # Réception d'une commande vocale et affichage du résultat.
     intent = rhasspy.speech_to_intent()
