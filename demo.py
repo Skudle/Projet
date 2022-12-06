@@ -1,5 +1,7 @@
 import rhasspy
 from sense_hat import SenseHat
+#!/usr/bin/env python
+# -*- coding: latin-1 -*-
 
 sense = SenseHat()
 
@@ -50,8 +52,8 @@ while state:
 
 
 
-    # Enonce la commande vocale reçue et les variables.
+    # Enonce la commande vocale recue et les variables.
     rhasspy.text_to_speech("Vous avez lance la commande {} avec les parametres {}".format(intent["name"], intent["variables"]))
 
-    # Affiche la commande vocale reçue.
+    # Affiche la commande vocale recue.
     sense.show_message("Commande : {}".format(intent["name"]), scroll_speed=0.07)
