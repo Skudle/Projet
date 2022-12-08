@@ -63,7 +63,6 @@ def speech_to_intent():
 	"""
     r = requests.post('http://localhost:12101/api/listen-for-command')
     json_resp = r.json()
-    print(json_resp)
     dictionary = {}
     dictionary["raw_tokens"], dictionary["tokens"], dictionary["name"], dictionary["variables"] = list(map(str,json_resp["raw_tokens"])) ,list(map(str,json_resp["tokens"])), str(json_resp["intent"]["name"]), json_resp['slots']
     return dictionary
