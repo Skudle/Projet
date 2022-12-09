@@ -1,12 +1,14 @@
 [Arret]
 Stop
-Arretons-nous
+
+[Fini]
+fini
 
 [Course]
 course
 magasin
 
-[numero]
+[Numero]
 chiffre
 numéro
 
@@ -15,8 +17,9 @@ print list
 list
 show
 
+
 [Ajout]
-(ajoute | add) (1..50){qty} (pomme | orange | ){article}
+(ajoute) (1..50){qty} (pomme | orange | ){article}
 
 [Delete]
 supprime
@@ -28,11 +31,42 @@ pomme
 lait
 jus
 
-[Code]
-numero{code}
-
 [Encrypter]
 encrypter
 
 [Decrypter]
 décrypter
+
+[Destruction]
+supprime le code secret
+delete code secret
+détruire
+
+[Code]
+un
+deux
+trois
+quatre
+cinq
+six
+sept
+huit
+neuf
+dix
+onze
+douze
+treize
+quatorze
+quinze
+seize
+dix sept
+dix huit
+dix neuf
+vinght
+
+[Changer]
+changer
+
+
+
+

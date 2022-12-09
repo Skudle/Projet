@@ -19,7 +19,9 @@ state2 = True
 course_list = []
 code_secret = None
 code_secret2 = None
+mdp = None
 lst = []
+data_lst = []
 
 print("> Le programme est entrain de se charger. Merci de votre patience :p")
 print("Starting...")
@@ -66,39 +68,62 @@ while state:
         running = True
         print("Commande numéro détectée")
         while running:
-            print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'supprimer le code secret', 'fini' ")
+            print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'changer', 'fini' ")
             choix = rhasspy.speech_to_intent()
-            if code_secret is None:
+            if mdp is None:
+                set_up_pwd = True
+                while set_up_pwd:
+                    print("> Quelle mot de passe souhaitez-vous entré? ")
+                    created_pwd = rhasspy.speech_to_intent()
+                    print(f"> Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
+                    hash_mdp = crypto.hashing(str(created_pwd["raw_tokens"][0]))
+                    del(created_pwd)
+                    set_up_pwd = False
+            else:
                 if choix["name"] == "Encrypter":
-                    print("> Veuillez entrer un numéro")
+                    print("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                     code_secret = rhasspy.speech_to_intent()
-                    code_secret2 = random.choice(["vert", "rouge", "jaune", "noir", "blanc"])
-                    encod = crypto.encode(code_secret2, str(code_secret["raw_tokens"][0]))
-                    lst.append(code_secret2)
-                    print("> Votre code secret a été enregistré!")
-                    print(f"> La clé est {code_secret2}")
+                    encod = crypto.encode("pomme", str(code_secret["raw_tokens"][0]))
+                    data_lst.append(encod)
+                    del(code_secret)
+                    print("> Votre code a été enregistré!")
+
+                elif choix["name"] == "Decrypter":
+                    print("> Veuillez entrer votre mot de passe ")
+                    inp = rhasspy.speech_to_intent()
+                    if crypto.hashing(inp["raw_tokens"][0]) == hash_mdp:
+                        print("Mot de passe correcte")
+                        print_lst = []
+                        for i in range(len(data_lst)):
+                            print_lst.append(crypto.decode(data_lst[i]))
+                        print(f">>> {print_lst} <<<")
+                        print_lst.clear()
 
                 elif choix["name"] == "Fini":
                     print("Commande numero arrete")
                     running = False
-
-            else:
-                if choix["name"] == "Decrypter":
-                    print("> Veuillez entrer la clé ")
-                    inp = rhasspy.speech_to_intent()
-                    if inp["raw_tokens"][0] in lst:
-                        decod = crypto.decode(code_secret2, encod)
-                        print(">>> " + decod + " <<<")
-                    else:
-                        print("!!! Clé incorrecte !!!")
 
                 elif choix["name"] == "Destruction":
-                    code_secret = None
-                    print("Code secret supprimé")
+                    data_lst.clear()
+                    print("Vos numéro ont été supprimé")
 
-                elif choix["name"] == "Fini":
-                    print("Commande numero arrete")
-                    running = False
+                elif choix["name"] == "Changer":
+                    print("> Entrez votre mot de passe actuelle")
+                    current_pwd = rhasspy.speech_to_intent()
+                    if crypto.hashing(current_pwd["raw_tokens"][0]) == hash_mdp:
+                        print("Mot de passe correcte")
+                        del(current_pwd)
+                        del(hash_mdp)
+                        time.sleep(1)
+                        print("> Veuillez entrer un nouveau mot de passe")
+                        now_pwd = rhasspy.speech_to_intent()
+                        print(f"Votre nouveau mot de passe est: {now_pwd['raw_tokens'][0]}")
+                        hash_mdp = crypto.hashing(now_pwd["raw_tokens"][0])
+                        del(now_pwd)
+                        print("Nouveau mot de passe défini")
+
+
+
 
 
 
