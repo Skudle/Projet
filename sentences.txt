@@ -3,6 +3,7 @@ Stop
 
 [Fini]
 fini
+terminer
 
 [Course]
 course
@@ -38,8 +39,7 @@ encrypter
 décrypter
 
 [Destruction]
-supprime le code secret
-delete code secret
+delete code
 détruire
 
 [Code]
@@ -63,10 +63,24 @@ dix sept
 dix huit
 dix neuf
 vinght
+fontaine
+maison
+fleur
+ciel
+terre
+soleil
+lune
+univers
+étoiles
+vinght et une
+
+[Police]
+cop
+police
+
 
 [Changer]
 changer
-
 
 
 

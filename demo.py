@@ -4,9 +4,47 @@ import time
 import rhasspy
 from sense_hat import SenseHat
 import crypto
-import random
 
 
+
+'''fichier = "/home/pi/sound.zip"
+sounds = "mixkit-ambulance-siren-uk-1640"
+sense = SenseHat()
+
+pygame.mixer.init()
+speaker = 0.8
+pygame.mixer.music.set_volume(speaker)
+
+red = (255, 0, 0)
+blue = (0, 0, 255)
+
+def police_red():
+    R = red
+    redlight = [
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    R, R, R, R, R, R, R, R,
+    ]
+    return redlight
+
+def police_blue():
+    B = blue
+    bluelight = [
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    B, B, B, B, B, B, B, B,
+    ]
+    return bluelight'''
 sense = SenseHat()
 
 # Lance l'apprentissage du fichier sentences.ini. Commentez cette partie si vous souhaitez ne pas le lancer
@@ -19,7 +57,7 @@ state2 = True
 course_list = []
 code_secret = None
 code_secret2 = None
-mdp = None
+hash_mdp = None
 lst = []
 data_lst = []
 
@@ -68,9 +106,8 @@ while state:
         running = True
         print("Commande numéro détectée")
         while running:
-            print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'changer', 'fini' ")
-            choix = rhasspy.speech_to_intent()
-            if mdp is None:
+            if hash_mdp is None:
+                print("> Le système a detecté qu'aucun mot de passe n'a été défini.")
                 set_up_pwd = True
                 while set_up_pwd:
                     print("> Quelle mot de passe souhaitez-vous entré? ")
@@ -80,6 +117,8 @@ while state:
                     del(created_pwd)
                     set_up_pwd = False
             else:
+                print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'delete code', 'changer', 'terminer' ")
+                choix = rhasspy.speech_to_intent()
                 if choix["name"] == "Encrypter":
                     print("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                     code_secret = rhasspy.speech_to_intent()
@@ -95,7 +134,7 @@ while state:
                         print("Mot de passe correcte")
                         print_lst = []
                         for i in range(len(data_lst)):
-                            print_lst.append(crypto.decode(data_lst[i]))
+                            print_lst.append(crypto.decode("pomme", data_lst[i]))
                         print(f">>> {print_lst} <<<")
                         print_lst.clear()
 
@@ -122,6 +161,16 @@ while state:
                         del(now_pwd)
                         print("Nouveau mot de passe défini")
 
+    '''elif intent['name'] == "Police":
+        images = [police_red, police_blue]
+        count = 0
+        for sound in sounds:
+            pygame.mixer.music.load(fichier + sounds)
+            pygame.mixer.music.play()
+            while True:
+                sense.set_pixels(images[count % len(images)]())
+                time.sleep(.75)
+                count += 1'''
 
 
 
