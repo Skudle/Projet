@@ -132,8 +132,7 @@ while state:
                     print("Liste vidée ")
 
                 elif article['name'] == 'Ajout':
-                    print(
-                        f"{article['variables']['qty']} {article['variables']['article']} ajouté dans la liste de course")
+                    print(f"{article['variables']['qty']} {article['variables']['article']} ajouté dans la liste de course")
                     course_list.append((article['variables']['article'], article['variables']['qty']))
 
         elif intent["name"] == "Numero":
@@ -141,15 +140,15 @@ while state:
             print("Commande numéro détectée")
             while running1:
                 if hash_mdp is None:
-                        print("> Le système a detecté qu'aucun mot de passe n'a été défini.")
-                        set_up_pwd = True
-                        while set_up_pwd:
-                            print("> Quelle mot de passe souhaitez-vous entré? ")
-                            created_pwd = rhasspy.speech_to_intent()
-                            print(f"> Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
-                            hash_mdp = crypto.hashing(str(created_pwd["raw_tokens"][0]))
-                            del created_pwd
-                            set_up_pwd = False
+                    print("> Le système a detecté qu'aucun mot de passe n'a été défini.")
+                    set_up_pwd = True
+                    while set_up_pwd:
+                        print("> Quelle mot de passe souhaitez-vous entré? ")
+                        created_pwd = rhasspy.speech_to_intent()
+                        print(f"> Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
+                        hash_mdp = crypto.hashing(str(created_pwd["raw_tokens"][0]))
+                        del created_pwd
+                        set_up_pwd = False
                 else:
                     print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'delete code', 'changer', 'terminer' ")
                     choix = rhasspy.speech_to_intent()
