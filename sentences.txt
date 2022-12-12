@@ -1,6 +1,12 @@
 [Arret]
 Stop
 
+[Vocale]
+mode vocale
+
+[Joystick]
+mode joystick
+
 [Fini]
 fini
 terminer
