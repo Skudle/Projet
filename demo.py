@@ -370,7 +370,7 @@ while state:
                     print("Commande course detectee.")
                     state2 = True
                     while state2:
-                        talk('list', 'ajoute qql chose', 'Stop', 'supprime la liste')
+                        talk('list, ajoute qql chose, Stop, supprime la liste')
                         print("> 'list', 'ajoute qql chose', 'Stop', 'supprime la liste'")
                         article = rhasspy.speech_to_intent()
                         if article["name"] == "Arret":
