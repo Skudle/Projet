@@ -58,27 +58,6 @@ six
 sept
 huit
 neuf
-dix
-onze
-douze
-treize
-quatorze
-quinze
-seize
-dix sept
-dix huit
-dix neuf
-vinght
-fontaine
-maison
-fleur
-ciel
-terre
-soleil
-lune
-univers
-étoiles
-vinght et une
 
 [Police]
 cop

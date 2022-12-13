@@ -45,13 +45,20 @@ def police_blue():
     B, B, B, B, B, B, B, B,
     ]
     return bluelight'''
+
+
+def talk(text):
+    rhasspy.text_to_speech(str(text))
+
 sense = SenseHat()
 
 # Lance l'apprentissage du fichier sentences.ini. Commentez cette partie si vous souhaitez ne pas le lancer
 sense.show_letter("A")
 print("Lancement de l'apprentissage.")
+talk("Lancement de l'apprentissage.")
 rhasspy.train_intent_files("/home/pi/sentences.txt")
 print("Apprentissage termine.")
+talk("Apprentissage termine.")
 state = True
 state2 = True
 course_list = []
@@ -62,10 +69,9 @@ lst = []
 data_lst = []
 joystick_on = False
 j_ou_v = True
-
-
 def joystick():
     print("Augmenter: droite, Diminuer: gauche, Sauvegarder: haut, Quitter: bas")
+    talk("Augmenter: droite, Diminuer: gauche, Sauvegarder: haut, Quitter: bas")
     number = 0
     total_number = ""
     num = []
@@ -85,6 +91,7 @@ def joystick():
                     number = 0
                 else:
                     print("Fini: Droite, Ajouter un autre numéro: Gauche")
+                    talk("Fini: Droite, Ajouter un autre numéro: Gauche")
                     run2 = True
                     while run2:
                         for event2 in sense.stick.get_events():
@@ -95,11 +102,14 @@ def joystick():
                                 elif event2.direction == 'left':
                                     num.append(total_number)
                                     total_number = ""
+                                    talk("Augmenter: droite, Diminuer: gauche, Sauvegarder: haut, Quitter: bas")
                                     print("Augmenter: droite, Diminuer: gauche, Sauvegarder: haut, Quitter: bas")
                                     run2 = False
 
 print("> Le programme est entrain de se charger. Merci de votre patience :p")
+talk("> Le programme est entrain de se charger. Merci de votre patience :p")
 print("Starting...")
+talk("Demarrage en cours")
 time.sleep(1)
 print(".")
 time.sleep(0.5)
@@ -116,13 +126,16 @@ while state:
     # Reception d'une commande vocale et affichage du resultat.
     if j_ou_v:
         print("> Le programme possède 2 modes: Vocale et Joystick. Quelle mode souhaitez-vous utiliser?")
+        talk("> Le programme possède 2 modes: Vocale et Joystick. Quelle mode souhaitez-vous utiliser?")
         while True:
             mode = rhasspy.speech_to_intent()
             if mode["name"] == "Joystick":
+                talk("Mode Joystick activé")
                 print("Mode Joystick activé")
                 joystick_on = True
                 break
             elif mode["name"] == "Vocale":
+                talk("Mode Vocale activé")
                 print("Mode Vocale activé")
                 joystick_on = False
                 break
