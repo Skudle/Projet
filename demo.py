@@ -126,7 +126,7 @@ while state:
     # Reception d'une commande vocale et affichage du resultat.
     if j_ou_v:
         print("> Le programme possède 2 modes: Vocale et Joystick. Quelle mode souhaitez-vous utiliser?")
-        talk("> Le programme possède 2 modes: Vocale et Joystick. Quelle mode souhaitez-vous utiliser?")
+        talk(" Le programme possède 2 modes: Vocale et Joystick. Quelle mode souhaitez-vous utiliser?")
         while True:
             mode = rhasspy.speech_to_intent()
             if mode["name"] == "Joystick":
@@ -145,14 +145,14 @@ while state:
 
     while not joystick_on:
         print("> Bienvenue dans le mode vocal, voici les commandes disponibles: 'magasin', 'numéro', 'Mode Joystick'")
-        talk("> Bienvenue dans le mode vocal, voici les commandes disponibles: 'magasin', 'numéro', 'Mode Joystick'")
+        talk("Bienvenue dans le mode vocal, voici les commandes disponibles: 'magasin', 'numéro', 'Mode Joystick'")
         intent = rhasspy.speech_to_intent()
         if intent["name"] == "Course":
             talk("Commande course detectee.")
             print("Commande course detectee.")
             state2 = True
             while state2:
-                talk("> Voici les commandes disponibles: 'list', 'ajoute qql chose', 'Stop', 'supprime la liste'")
+                talk("Voici les commandes disponibles: 'list', 'ajoute qql chose', 'Stop', 'supprime la liste'")
                 print("> Voici les commandes disponibles: 'list', 'ajoute qql chose', 'Stop', 'supprime la liste'")
                 article = rhasspy.speech_to_intent()
                 if article["name"] == "Arret":
@@ -162,7 +162,7 @@ while state:
 
                 elif article["name"] == "list":
                     print(f"> Voici le contenu de la liste {course_list}")
-                    talk(f"> Voici le contenu de la liste {course_list}")
+                    talk(f"Voici le contenu de la liste {course_list}")
                     rhasspy.text_to_speech(str(course_list))
 
                 elif article['name'] == 'Delete':
@@ -182,34 +182,34 @@ while state:
             while running1:
                 if hash_mdp is None:
                     print("> Le système a detecté qu'aucun mot de passe n'a été défini.")
-                    talk("> Le système a detecté qu'aucun mot de passe n'a été défini.")
+                    talk("Le système a detecté qu'aucun mot de passe n'a été défini.")
                     set_up_pwd = True
                     while set_up_pwd:
                         print("> Quelle mot de passe souhaitez-vous entré? ")
-                        talk("> Quelle mot de passe souhaitez-vous entré? ")
+                        talk("Quelle mot de passe souhaitez-vous entré? ")
                         created_pwd = rhasspy.speech_to_intent()
-                        talk(f"> Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
+                        talk(f"Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
                         print(f"> Votre mot de passe est: {created_pwd['raw_tokens'][0]}")
                         hash_mdp = crypto.hashing(str(created_pwd["raw_tokens"][0]))
                         del created_pwd
                         set_up_pwd = False
                 else:
-                    talk("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'delete code', 'changer', 'terminer' ")
+                    talk("Voici les commandes disponibles: 'encrypter', 'decrypter', 'delete code', 'changer', 'terminer' ")
                     print("> Voici les commandes disponibles: 'encrypter', 'decrypter', 'delete code', 'changer', 'terminer' ")
                     choix = rhasspy.speech_to_intent()
                     if choix["name"] == "Encrypter":
-                        talk("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
+                        talk("Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                         print("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                         code_secret = rhasspy.speech_to_intent()
                         encod = crypto.encode("pomme", str(code_secret["raw_tokens"][0]))
                         data_lst.append(encod)
                         del code_secret
-                        talk("> Votre code a été enregistré!")
+                        talk("Votre code a été enregistré!")
                         print("> Votre code a été enregistré!")
 
                     elif choix["name"] == "Decrypter":
                         print("> Veuillez entrer votre mot de passe ")
-                        talk("> Veuillez entrer votre mot de passe ")
+                        talk("Veuillez entrer votre mot de passe ")
                         inp = rhasspy.speech_to_intent()
                         if crypto.hashing(inp["raw_tokens"][0]) == hash_mdp:
                             print("Mot de passe correcte")
@@ -217,7 +217,7 @@ while state:
                             print_lst = []
                             for i in range(len(data_lst)):
                                 print_lst.append(crypto.decode("pomme", data_lst[i]))
-                            talk(f">>> {print_lst} <<<")
+                            talk(f"{print_lst}")
                             print(f">>> {print_lst} <<<")
                             print_lst.clear()
 
@@ -232,7 +232,7 @@ while state:
                         talk("Vos numéro ont été supprimé")
 
                     elif choix["name"] == "Changer":
-                        talk("> Entrez votre mot de passe actuelle")
+                        talk("Entrez votre mot de passe actuelle")
                         print("> Entrez votre mot de passe actuelle")
                         current_pwd = rhasspy.speech_to_intent()
                         if crypto.hashing(current_pwd["raw_tokens"][0]) == hash_mdp:
@@ -241,7 +241,7 @@ while state:
                             del current_pwd
                             del hash_mdp
                             time.sleep(1)
-                            talk("> Veuillez entrer un nouveau mot de passe")
+                            talk("Veuillez entrer un nouveau mot de passe")
                             print("> Veuillez entrer un nouveau mot de passe")
                             now_pwd = rhasspy.speech_to_intent()
                             talk(f"Votre nouveau mot de passe est: {now_pwd['raw_tokens'][0]}")
@@ -261,7 +261,7 @@ while state:
             print("Commande invalide. Veuillez recommencer.")
 
     print("> Mode Joystick: Magasin: Gauche, Numéro: Droite, Mode Vocale: Haut")
-    talk("> Mode Joystick: Magasin: Gauche, Numéro: Droite, Mode Vocale: Haut")
+    talk("Mode Joystick: Magasin: Gauche, Numéro: Droite, Mode Vocale: Haut")
     while joystick_on:
         for event in sense.stick.get_events():
             if event.action == 'pressed':
@@ -271,29 +271,29 @@ while state:
                     print("Commande numéro détectée")
                     while running1:
                         if hash_mdp is None:
-                            talk("> Le système a detecté qu'aucun mot de passe n'a été défini.")
+                            talk("Le système a detecté qu'aucun mot de passe n'a été défini.")
                             print("> Le système a detecté qu'aucun mot de passe n'a été défini.")
                             set_up_pwd = True
                             while set_up_pwd:
-                                talk("> Quelle mot de passe souhaitez-vous entrer? ")
+                                talk("Quelle mot de passe souhaitez-vous entrer? ")
                                 print("> Quelle mot de passe souhaitez-vous entrer? ")
                                 created_pwd = joystick()
-                                talk(f"> Votre mot de passe est: {created_pwd[0]}")
+                                talk(f"Votre mot de passe est: {created_pwd[0]}")
                                 print(f"> Votre mot de passe est: {created_pwd[0]}")
                                 hash_mdp = crypto.hashing(str(created_pwd[0]))
                                 del created_pwd
                                 set_up_pwd = False
                         else:
-                            talk("> Encrypter: 1, Decrypter: 2, Delete Code: 3, Changer mdp: 4, Quitter: 5")
+                            talk("Encrypter: 1, Decrypter: 2, Delete Code: 3, Changer mdp: 4, Quitter: 5")
                             print("> Encrypter: 1, Decrypter: 2, Delete Code: 3, Changer mdp: 4, Quitter: 5")
                             count = joystick()
                             if count[0] == "1":
                                 # Encrypter
-                                talk("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
+                                talk("Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                                 print("> Veuillez entrer un numéro que vous souhaitez sauvegarder sur l'appareil")
                                 code_secret = joystick()
                                 for i in range(len(code_secret)):
-                                    talk(f"> Votre code {code_secret[i]} a été enregistré et encrypté!")
+                                    talk(f"Votre code {code_secret[i]} a été enregistré et encrypté!")
                                     print(f"> Votre code {code_secret[i]} a été enregistré et encrypté!")
                                     encod = crypto.encode("pomme", str(code_secret[i]))
                                     data_lst.append(encod)
@@ -301,7 +301,7 @@ while state:
 
                             elif count[0] == "2":
                                 # Decrypter
-                                talk("> Veuillez entrer votre mot de passe pour confirmer votre identité")
+                                talk("Veuillez entrer votre mot de passe pour confirmer votre identité")
                                 print("> Veuillez entrer votre mot de passe pour confirmer votre identité")
                                 inp = joystick()
                                 if crypto.hashing(str(inp[0])) == hash_mdp:
