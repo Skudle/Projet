@@ -26,7 +26,7 @@ show
 
 
 [Ajout]
-(ajoute) (1..50){qty} (pomme | orange | ){article}
+(ajoute) (1..50){qty} (pomme | orange | cerise | fraise | carotte | concombre | courgette | champignon | salade | tomate | pomme de terre | fromage | lait | oeuf | poulet | boeuf | sucre | sel | papier toilette | gel douche | huile | eau | shampoing | savon | liquide vaisselle | nouille | riz | farine |){article}
 
 [Delete]
 supprime
@@ -59,6 +59,7 @@ sept
 huit
 neuf
 
+
 [Police]
 cop
 police
@@ -66,6 +67,3 @@ police
 
 [Changer]
 changer
-
-
-
